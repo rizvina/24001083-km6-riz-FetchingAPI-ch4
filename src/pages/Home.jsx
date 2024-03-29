@@ -12,20 +12,16 @@ const MovieCard = ({ movie }) => {
 
   // Fungsi renderRatingStars digunakan untuk menghasilkan tampilan bintang rating berdasarkan nilai rating yang diberikan.
   const renderRatingStars = (rating) => {
-    const stars = []; // Inisialisasi array untuk menyimpan elemen-elemen bintang
-    const numStars = Math.round(rating / 2); // Menghitung jumlah bintang yang harus ditampilkan berdasarkan nilai rating
-    // Perulangan untuk membuat elemen-elemen bintang sebanyak 5 kali
+    const stars = [];
+    const numStars = Math.round(rating / 2);
     for (let i = 0; i < 5; i++) {
-      // Memeriksa apakah indeks saat ini kurang dari jumlah bintang yang harus ditampilkan
       if (i < numStars) {
-        // Jika i kurang dari numStars, tambahkan bintang kuning (menggunakan class text-yellow-400) ke dalam array stars
         stars.push(
           <span key={i} className="text-yellow-400">
             &#9733;
           </span>
         );
       } else {
-        // Jika i tidak kurang dari numStars, tambahkan bintang abu-abu (menggunakan class text-gray-400) ke dalam array stars
         stars.push(
           <span key={i} className="text-gray-400">
             &#9733;

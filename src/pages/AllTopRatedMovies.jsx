@@ -76,24 +76,17 @@ const AllTopRatedMovies = () => {
     // Fungsi fetchTopRatedMovies untuk mengambil data film berperingkat tertinggi
     const fetchTopRatedMovies = async () => {
       try {
-        // Memanggil API untuk mendapatkan data film berperingkat tertinggi
         const response = await axios.get(
           `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&page=${currentPage}&sort_by=${sortBy}&vote_count.gte=200`
         );
-        // Mengatur state topRatedMovies dengan data film yang diperoleh dari response
         setTopRatedMovies(response.data.results);
-        // Menambahkan nilai 1 ke lastPage untuk menandakan bahwa data telah diambil dari halaman terakhir
         setLastPage(lastPage + 1);
       } catch (error) {
-        // Menangani error jika terjadi kesalahan saat mengambil data film berperingkat tertinggi
         console.error("Error fetching top rated movies: ", error);
       }
     };
-    // Mereset currentPage menjadi 1 ketika sortBy berubah
     setCurrentPage(1);
-    // Mereset lastPage menjadi 0 ketika sortBy berubah
     setLastPage(0);
-    // Memanggil fungsi fetchTopRatedMovies setiap kali nilai sortBy berubah
     fetchTopRatedMovies();
   }, [sortBy]); // useEffect akan dipanggil kembali setiap kali nilai sortBy berubah
 

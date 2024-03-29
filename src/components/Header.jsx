@@ -29,9 +29,7 @@ export default function Home() {
     // Set interval untuk mengubah currentMovie setiap 2 detik
     const interval = setInterval(() => {
       setCurrentMovie((prevMovie) => (prevMovie + 1) % movies.length);
-    }, 2000); // Ganti dengan interval yang diinginkan (dalam milidetik)
-
-    // Bersihkan interval untuk mencegah memory leak
+    }, 2000);
     return () => clearInterval(interval);
   }, [movies]);
 
@@ -43,14 +41,10 @@ export default function Home() {
       );
       // Menyimpan hasil respons dari API dalam variabel videos
       const videos = response.data.results;
-      // Memeriksa apakah ada video (trailer) yang tersedia
       if (videos.length > 0) {
-        // Jika ada, ambil kunci trailer dari video pertama dalam array videos
         const trailerKey = videos[0].key;
-        // Buka tautan trailer di tab baru menggunakan window.open
         window.open(`https://www.youtube.com/watch?v=${trailerKey}`, "_blank");
       } else {
-        // Jika tidak ada video (trailer) yang tersedia, log pesan bahwa tidak ada trailer tersedia untuk film ini
         console.log("Tidak ada trailer tersedia untuk film ini.");
       }
     } catch (err) {
@@ -62,14 +56,14 @@ export default function Home() {
   return (
     <>
       <div>
-        <Navbar /> {/* Render komponen Navbar */}
+        <Navbar />
       </div>
       <div className="carousel-container">
         <div className="carousel">
           {/* Menggunakan method map untuk menampilkan setiap film dari state movies */}
           {movies.map((movie, index) => (
             <div
-              key={index} // Set kunci unik untuk setiap elemen dalam daftar, dalam hal ini menggunakan index dari array sebagai kunci
+              key={index} // Set kunci unik untuk setiap elemen dalam daftar
               className={`carousel-slide ${
                 index === currentMovie ? "show" : ""
               }`} // Menambahkan kelas "show" pada slide yang sedang ditampilkan
@@ -81,10 +75,7 @@ export default function Home() {
                 <h1 className="text-6xl whitespace-normal max-w-sm mb-3">
                   {movie.title} {/* Menampilkan judul film */}
                 </h1>
-                <p className="max-w-sm">
-                  {movie.overview.slice(0, 75)}...{" "}
-                  {/* Menampilkan cuplikan ringkas dari deskripsi film dengan memotongnya menjadi 75 karakter */}
-                </p>
+                <p className="max-w-sm">{movie.overview.slice(0, 75)}... </p>
 
                 <div className="left-0 p-4 mr-2">
                   {/* Tombol untuk memutar trailer */}

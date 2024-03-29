@@ -76,11 +76,9 @@ const AllNowPlayingMovies = () => {
     // Fungsi async untuk mengambil data film yang sedang diputar saat ini
     const fetchNowPlayingMovies = async () => {
       try {
-        // Mengirimkan permintaan GET ke API untuk mendapatkan data film yang sedang diputar
         const response = await axios.get(
           `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${currentPage}`
         );
-        // Menambahkan data film yang baru diambil ke dalam state nowPlayingMovies dengan menyebarkan array yang ada dan hasil dari response
         setNowPlayingMovies([...nowPlayingMovies, ...response.data.results]);
         // Menetapkan halaman terakhir ke halaman saat ini untuk memperbarui state lastPage
         setLastPage(lastPage + 1);
@@ -88,7 +86,6 @@ const AllNowPlayingMovies = () => {
         console.error("Error fetching now playing movies: ", error); // Menangani kesalahan jika gagal mengambil data film
       }
     };
-    // Memanggil fungsi fetchNowPlayingMovies hanya jika halaman terakhir tidak sama dengan halaman saat ini
     if (lastPage !== currentPage) {
       fetchNowPlayingMovies(); // Memanggil fungsi untuk mengambil data film
     }
